@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
+import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.model.LazyHeaders
@@ -44,6 +45,7 @@ class FullScreenImageView : AppCompatActivity(), View.OnClickListener {
 
         /*Set Thumbnail Image*/
         Util.setImageURL(mActivity, intent.getStringExtra(Util.IMAGE_VALUE).toString(),fullImgIV)
+        fullImgIV.setOnTouchListener(ImageMatrixTouchHandler(mActivity));
     }
 
     override fun onBackPressed() {

@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:descendantFocusability="beforeDescendants"
     tools:context=".ui.LoginActivity">
 
     <RelativeLayout
@@ -105,6 +107,7 @@
                                 android:id="@+id/emailET"
                                 style="@style/editTextStyle"
                                 android:singleLine="true"
+                                android:inputType="textEmailAddress"
                                 android:imeOptions="actionNext"
                                 android:layout_marginStart="@dimen/_10sdp"
                                 android:layout_toEndOf="@+id/emailIV"
@@ -170,5 +173,7 @@
         </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
+
+    <include layout="@layout/row_progress_dot"/>
 
 </RelativeLayout>

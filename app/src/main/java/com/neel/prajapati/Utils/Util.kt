@@ -59,6 +59,7 @@ object Util {
     private var dialog: AlertDialog? = null
     var IMAGE_VALUE = "image_value"
     var IS_LOGIN = "is_login"
+    var IMAGE_LIST = "image_list"
     const val ONE = "1"
     const val ZERO = "0"
     var PREF_FILE = "OURLY_PREF"

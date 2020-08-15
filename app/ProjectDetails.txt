@@ -1,0 +1,7 @@
+VersionCode : 1
+VersionName : 1.0
+AndroidStudio Version : 4.0.1
+Build Version : 30
+minSdk Version : 22 
+buildToolVersion : 30.0.0
+

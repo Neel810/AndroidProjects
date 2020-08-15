@@ -85,11 +85,11 @@ class LoginActivity : AppCompatActivity(), View.OnTouchListener, View.OnClickLis
 
             }
             !emailET.text.toString().equals("hello@yopmail.com") -> {
-                msg = getString(R.string.please_enter_valid_email_id)
+                msg = getString(R.string.entered_email_id_is_wrong)
 
             }
-            !pswrdET.text.toString().equals("“Password@123") -> {
-                msg = getString(R.string.please_enter_valid_password)
+            !pswrdET.text.toString().equals("Password@123") -> {
+                msg = getString(R.string.entered_password_is_wrong)
 
             }
         }
@@ -105,7 +105,7 @@ class LoginActivity : AppCompatActivity(), View.OnTouchListener, View.OnClickLis
 
                     Util.showHideProgressbar(mDotProgressBar, View.VISIBLE)
                     Pref.setValue(mActivity, Util.IS_LOGIN, ONE)
-
+                    //
                     val i = Intent(this, MainActivity::class.java)
                     startActivity(i)
                     finish()

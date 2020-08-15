@@ -1,16 +1,22 @@
 package com.neel.prajapati.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.imagelistingdemo.viewModel.ImageListViewModel
 import com.mysocietyapp.watchman.Util.Util
+import com.mysocietyapp.watchman.Util.Util.IMAGE_LIST
 import com.mysocietyapp.watchman.Util.Util.IMAGE_VALUE
+import com.mysocietyapp.watchman.Util.Util.ZERO
 import com.neel.prajapati.R
+import com.neel.prajapati.Utils.Pref
 import com.neel.prajapati.Utils.toast
 import com.neel.prajapati.adapter.ImageListingAdapter
 import com.neel.prajapati.model.ImageListModelItem
@@ -34,11 +40,42 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setData() {
-        /*Call Image ist API*/
-        callImageAPI()
 
-        /*handle Image API*/
-        handleImageListAPI()
+        if (Pref.getValue(mActivity,Util.IMAGE_LIST,"").isEmpty()) {
+
+            /*Call Image ist API*/
+            callImageAPI()
+
+            /*handle Image API*/
+            handleImageListAPI()
+        }else{
+
+            /*Get Data From Pref*/
+            imageList= ArrayList()
+            val imageListString = Pref.getValue(mActivity,IMAGE_LIST,"")
+
+            val gson = Gson()
+            imageList = gson.fromJson(
+                imageListString,
+                object :
+                    TypeToken<java.util.ArrayList<ImageListModelItem>>() {}.type
+            )
+
+           /*Set Image List Data*/
+            if (Util.notNullEmpty(imageList)) {
+
+                imageListingAdapter = ImageListingAdapter(mActivity, imageList,
+                    itemClick = { i, imageModel ->
+                        onItemClick(
+                            i!!, imageModel
+                        )
+                    })
+                imageListRV.adapter = imageListingAdapter
+            } else {
+                noDataTV.setVisibility(View.VISIBLE)
+                imageListRV.visibility = View.GONE
+            }
+        }
 
         /*Swipe Refresh View*/
         swipeRefreshView()
@@ -67,6 +104,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         imageList = ArrayList()
         imageList = resultList
 
+        Pref.setValue(mActivity,IMAGE_LIST,Util.getToJsonData(imageList))
+
         if (Util.notNullEmpty(imageList)) {
 
             imageListingAdapter = ImageListingAdapter(mActivity, imageList,
@@ -84,8 +123,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     /*On item Click*/
     private fun onItemClick(i: Int, imageModel: ImageListModelItem) {
-        val i=Intent(this,FullScreenImageView::class.java)
-        i.putExtra(IMAGE_VALUE,imageModel.thumbnailUrl)
+        val i = Intent(this, FullScreenImageView::class.java)
+        i.putExtra(IMAGE_VALUE, imageModel.thumbnailUrl)
         startActivity(i)
     }
 
@@ -124,6 +163,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
             if (Util.isNetworkConnected(mActivity)) {
                 if (imageList != null) {
+                    Pref.setValue(mActivity,IMAGE_LIST,"")
                     imageList.clear()
                     callImageAPI()
                 }
@@ -137,10 +177,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.logoutIV->{
-               val i=Intent(this,LoginActivity::class.java)
+        when (v?.id) {
+            R.id.logoutIV -> {
+                Pref.setValue(mActivity, Util.IS_LOGIN, ZERO)
+                Pref.setValue(mActivity,IMAGE_LIST,"")
+                val i = Intent(this, LoginActivity::class.java)
                 startActivity(i)
+                finish()
             }
         }
     }

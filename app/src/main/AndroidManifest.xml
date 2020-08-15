@@ -12,14 +12,16 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.LoginActivity"/>
-        <activity android:name=".ui.FullScreenImageView" />
+        <activity android:name=".ui.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.FullScreenImageView"
+            android:screenOrientation="portrait"/>
         <activity
-            android:name=".ui.SplashScreen"
+            android:name=".ui.MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.SplashScreen"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_splash_screen"
-            android:theme="@style/FullscreenTheme" />
-        <activity android:name=".ui.MainActivity">
+            android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

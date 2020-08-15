@@ -14,4 +14,6 @@
     <string name="please_enter_password">Please enter password</string>
     <string name="please_enter_valid_email_id">Please enter valid email id</string>
     <string name="please_enter_valid_password">Please ente valid password</string>
+    <string name="entered_email_id_is_wrong">Entered email id is worng</string>
+    <string name="entered_password_is_wrong">Entered password  is worng</string>
 </resources>
