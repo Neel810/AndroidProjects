@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Neel_practical_task</string>
+    <string name="no_data_found">No Data found</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="no_internet_connction">No internet connection</string>
+    <string name="title_activity_splash_screen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="image">Image</string>
+    <string name="sign_in">Sign In</string>
+    <string name="email_id">Email id</string>
+    <string name="password">password</string>
+    <string name="please_enter_email_id">Please enter email id</string>
+    <string name="please_enter_password">Please enter password</string>
+    <string name="please_enter_valid_email_id">Please enter valid email id</string>
+    <string name="please_enter_valid_password">Please ente valid password</string>
+</resources>
